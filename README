@@ -1,0 +1,26 @@
+Following concepts are user:
+
+1) gin framework for creating web API
+
+2) http.server with context 
+
+3) viper library for working with config.yml
+
+4) migration util to create database migrations
+
+5) sqlx to connect database (with pq lib with postgres drivers)
+
+6) logrus for logging
+
+7) godoenv for using .env
+
+Some commands:
+go run cmd/main.go
+
+go get -u path
+
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest  
+migrate create -ext sql -dir ./schema seq init                                                            
+migrate -path ./schema -database 'postgres://postgres:admin@localhost:5436/postgres?sslmode=disable' up   
+
+docker run --name=library-app -e POSTGRES_PASSWORD='qwerty' -p 5436:5432 -d --rm postgres
