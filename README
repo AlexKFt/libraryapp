@@ -14,6 +14,8 @@ Following concepts are user:
 
 7) godoenv for using .env
 
+8) jwt-go for using jft-tokens
+
 Some commands:
 go run cmd/main.go
 

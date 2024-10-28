@@ -8,6 +8,7 @@ import (
 
 type Authorization interface {
 	CreateUser(user library.User) (int, error)
+	GetUser(name string, password string) (library.User, error)
 }
 
 type Book interface {
