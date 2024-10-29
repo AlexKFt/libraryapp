@@ -8,6 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create todo list
+// @Security ApiKeyAuth
+// @Tags books
+// @Description create book
+// @ID create-book
+// @Accept  json
+// @Produce  json
+// @Param input body library.Book true "book info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Failure default {object} errorResponse
+// @Router /api/book [post]
 func (h *Handler) createBook(c *gin.Context) {
 	_, err := getUserId(c)
 	if err != nil {
