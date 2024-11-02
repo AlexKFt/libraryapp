@@ -16,17 +16,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-// @title Library APP API
-// @version 1.0
-// @description API Server Library APP
-
-// @host localhost:8000
-// @BasePath /
-
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name Authorization
-
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
@@ -38,11 +27,12 @@ func main() {
 		logrus.Fatalf("error initialization env: %s", err.Error())
 	}
 
+	logrus.Warn(os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_NAME"), os.Getenv("DB_PASSWORD"), viper.GetString("db.sslmode"))
 	db, err := repository.NewPostgresDB(repository.Config{
-		Host:     viper.GetString("db.host"),
-		Port:     viper.GetString("db.port"),
-		Username: viper.GetString("db.username"),
-		DBName:   viper.GetString("db.dbname"),
+		Host:     os.Getenv("DB_HOST"),
+		Port:     os.Getenv("DB_PORT"),
+		Username: os.Getenv("DB_USER"),
+		DBName:   os.Getenv("DB_NAME"),
 		SSLMode:  viper.GetString("db.sslmode"),
 		Password: os.Getenv("DB_PASSWORD"),
 	})

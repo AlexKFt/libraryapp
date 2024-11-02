@@ -1,0 +1,42 @@
+version: '3.8'
+
+
+
+services:
+  web:
+    container_name: web
+    build: .
+    env_file:
+      - docker.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:  
+      - .:/usr/src/app
+    command: go run cmd/main.go -b 0.0.0.0
+    networks: 
+      - my-net
+  db:
+    container_name: mydb
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      LC_ALL: C.UTF-8
+      POSTGRES_USER: Alexander
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: libdb
+    ports:
+      - 5436:5432
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    networks:
+      - my-net
+
+volumes:
+  postgres-db:
+
+networks:
+  my-net:
+    external: true
+    name: my-net
