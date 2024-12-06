@@ -27,7 +27,6 @@ func main() {
 		logrus.Fatalf("error initialization env: %s", err.Error())
 	}
 
-	logrus.Warn(os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_NAME"), os.Getenv("DB_PASSWORD"), viper.GetString("db.sslmode"))
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     os.Getenv("DB_HOST"),
 		Port:     os.Getenv("DB_PORT"),
